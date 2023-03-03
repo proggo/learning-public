@@ -277,7 +277,7 @@ spec:
               mountPath: /dgraph
           resources:
             requests:
-              memory: 8Gi
+              memory: 12Gi
               cpu: '2'
             limits:
               memory: 16Gi
