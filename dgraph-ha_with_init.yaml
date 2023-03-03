@@ -143,6 +143,13 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
+        resources:
+            requests:
+              memory: 12Gi
+              cpu: '12'
+            limits:
+              memory: 12Gi
+              cpu: '12'
         env:
           - name: POD_NAMESPACE
             valueFrom:
@@ -196,7 +203,7 @@ spec:
         - "ReadWriteOnce"
       resources:
         requests:
-          storage: 5Gi
+          storage: 10Gi
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
 apiVersion: apps/v1
@@ -268,6 +275,13 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /dgraph
+          resources:
+            requests:
+              memory: 12Gi
+              cpu: '12'
+            limits:
+              memory: 12Gi
+              cpu: '12'
       containers:
       - name: alpha
         image: dgraph/dgraph:latest
@@ -282,6 +296,13 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
+        resources:
+            requests:
+              memory: 12Gi
+              cpu: '12'
+            limits:
+              memory: 12Gi
+              cpu: '12'
         env:
           # This should be the same namespace as the dgraph-zero
           # StatefulSet to resolve a Dgraph Zero's DNS name for
@@ -336,7 +357,7 @@ spec:
         - "ReadWriteOnce"
       resources:
         requests:
-          storage: 5Gi
+          storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
