@@ -145,11 +145,11 @@ spec:
           mountPath: /dgraph
         resources:
             requests:
-              memory: 12Gi
-              cpu: '12'
+              memory: 4Gi
+              cpu: '1'
             limits:
-              memory: 12Gi
-              cpu: '12'
+              memory: 16Gi
+              cpu: '4'
         env:
           - name: POD_NAMESPACE
             valueFrom:
@@ -277,11 +277,11 @@ spec:
               mountPath: /dgraph
           resources:
             requests:
-              memory: 12Gi
-              cpu: '12'
+              memory: 4Gi
+              cpu: '1'
             limits:
-              memory: 12Gi
-              cpu: '12'
+              memory: 16Gi
+              cpu: '4'
       containers:
       - name: alpha
         image: dgraph/dgraph:latest
@@ -298,11 +298,11 @@ spec:
           mountPath: /dgraph
         resources:
             requests:
-              memory: 12Gi
-              cpu: '12'
+              memory: 4Gi
+              cpu: '1'
             limits:
-              memory: 12Gi
-              cpu: '12'
+              memory: 16Gi
+              cpu: '4'
         env:
           # This should be the same namespace as the dgraph-zero
           # StatefulSet to resolve a Dgraph Zero's DNS name for
