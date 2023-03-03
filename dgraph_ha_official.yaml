@@ -196,7 +196,7 @@ spec:
         - "ReadWriteOnce"
       resources:
         requests:
-          storage: 5Gi
+          storage: 10Gi
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
 apiVersion: apps/v1
@@ -336,7 +336,7 @@ spec:
         - "ReadWriteOnce"
       resources:
         requests:
-          storage: 5Gi
+          storage: 10Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
