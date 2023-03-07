@@ -110,6 +110,7 @@ metadata:
   name: dgraph-zero
 spec:
   serviceName: "dgraph-zero"
+  podManagementPolicy: Parallel
   replicas: 3
   selector:
     matchLabels:
@@ -285,8 +286,8 @@ spec:
               cpu: '4'
       containers:
       - name: alpha
-        image: dgraph/dgraph:latest
-        imagePullPolicy: IfNotPresent
+        image: asia-southeast1-docker.pkg.dev/dgraph-kubernetes/test-repo/dgraph-with-backup:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 7080
           name: grpc-alpha-int
@@ -297,6 +298,9 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
+        - name: googleservice
+          mountPath: /etc/google
+          readOnly: true
         resources:
             requests:
               memory: 4Gi
@@ -308,6 +312,8 @@ spec:
           # This should be the same namespace as the dgraph-zero
           # StatefulSet to resolve a Dgraph Zero's DNS name for
           # Alpha's --zero flag.
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /etc/google/credentials.json
           - name: POD_NAMESPACE
             valueFrom:
               fieldRef:
@@ -317,6 +323,21 @@ spec:
         # dgraph-alpha versions greater than or equal to v1.2.3 or v20.03.1 can support
         #  a comma-separated list of zeros.  The value below supports 3 zeros
         #  (set according to number of replicas)
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - gcsfuse
+              - -o
+              - nonempty
+              - dgraph_exports
+              - /dgraph/export
+          preStop:
+            exec:
+              command:
+              - fusermount
+              - -u
+              - /dgraph/export
         command:
           - bash
           - "-c"
@@ -343,6 +364,10 @@ spec:
           successThreshold: 1
       terminationGracePeriodSeconds: 600
       volumes:
+      - name: googleservice
+        secret:
+          defaultMode: 420
+          secretName: dgraph-storage-creds
       - name: datadir
         persistentVolumeClaim:
           claimName: datadir
