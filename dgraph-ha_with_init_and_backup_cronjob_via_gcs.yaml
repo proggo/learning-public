@@ -286,7 +286,7 @@ spec:
               cpu: '4'
       containers:
       - name: alpha
-        image: asia-southeast1-docker.pkg.dev/dgraph-kubernetes/test-repo/dgraph-with-backup:v1
+        image: asia-southeast1-docker.pkg.dev/dgraph-kubernetes/test-repo/dgraph-with-backup:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 7080
