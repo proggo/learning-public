@@ -325,15 +325,31 @@ spec:
         # dgraph-alpha versions greater than or equal to v1.2.3 or v20.03.1 can support
         #  a comma-separated list of zeros.  The value below supports 3 zeros
         #  (set according to number of replicas)
+#         lifecycle:
+#           postStart:
+#             exec:
+#               command:
+#               - gcsfuse
+#               - -o
+#               - nonempty
+#               - dgraph-test-exports
+#               - /dgraph/export
+#           preStop:
+#             exec:
+#               command:
+#               - fusermount
+#               - -u
+#               - /dgraph/export
         lifecycle:
           postStart:
             exec:
               command:
-              - gcsfuse
-              - -o
-              - nonempty
-              - dgraph-test-exports
-              - /dgraph/export
+              - /bin/sh
+              - -c
+              - |
+                mkdir -p /dgraph/export
+                gcsfuse --foreground --debug_fuse --debug_fs --debug_gcs --debug_http -o nonempty dgraph-test-exports /dgraph/export
+#                 gcsfuse -o nonempty dgraph-test-exports /dgraph/export
           preStop:
             exec:
               command:
