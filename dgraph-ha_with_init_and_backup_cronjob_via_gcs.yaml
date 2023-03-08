@@ -330,7 +330,7 @@ spec:
               - gcsfuse
               - -o
               - nonempty
-              - dgraph_exports
+              - dgraph-test-exports
               - /dgraph/export
           preStop:
             exec:
