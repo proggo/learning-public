@@ -288,8 +288,8 @@ spec:
       - name: alpha
 #         securityContext:
 #           privileged: true
-        image: asia-southeast1-docker.pkg.dev/dgraph-kubernetes/test-repo/dgraph-with-backup:v3
-        imagePullPolicy: Always
+        image: dgraph/dgraph:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7080
           name: grpc-alpha-int
@@ -325,37 +325,25 @@ spec:
         # dgraph-alpha versions greater than or equal to v1.2.3 or v20.03.1 can support
         #  a comma-separated list of zeros.  The value below supports 3 zeros
         #  (set according to number of replicas)
-#         lifecycle:
-#           postStart:
-#             exec:
-#               command:
-#               - gcsfuse
-#               - -o
-#               - nonempty
-#               - dgraph-test-exports
-#               - /dgraph/export
-#           preStop:
-#             exec:
-#               command:
-#               - fusermount
-#               - -u
-#               - /dgraph/export
+
         lifecycle:
           postStart:
             exec:
               command:
-              - /bin/sh
+              - sh
               - -c
               - |
+                mkdir -p /mnt/filestore/${POD_NAMESPACE}/dgraph_exports
+                mount -t nfs4 -o nfsvers=4.1 10.96.213.218:/thrive_export /mnt/filestore/${POD_NAMESPACE}/dgraph_exports
                 mkdir -p /dgraph/export
-                gcsfuse --foreground --debug_fuse --debug_fs --debug_gcs --debug_http -o nonempty dgraph-test-exports /dgraph/export
-#                 gcsfuse -o nonempty dgraph-test-exports /dgraph/export
+                ln -s /mnt/filestore/${POD_NAMESPACE}/dgraph_exports /dgraph/export
           preStop:
             exec:
               command:
-              - fusermount
-              - -u
-              - /dgraph/export
+              - sh
+              - -c
+              - |
+                umount /mnt/filestore
         command:
           - bash
           - "-c"
