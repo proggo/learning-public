@@ -300,8 +300,6 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
-        - name: filestore-volume
-          mountPath: /mnt/filestore
         - name: googleservice
           mountPath: /etc/google
           readOnly: true
