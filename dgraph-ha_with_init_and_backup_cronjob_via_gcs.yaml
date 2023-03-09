@@ -333,10 +333,10 @@ spec:
               - sh
               - -c
               - |
-                mkdir -p /mnt/filestore/${POD_NAMESPACE}/export
-                mount -t nfs4 -o nfsvers=4.1 10.96.213.218:/thrive_export /mnt/filestore/${POD_NAMESPACE}/export
+                mkdir -p /mnt/filestore/${POD_NAMESPACE}/dgraph_exports
+                mount -t nfs4 -o nfsvers=4.1 10.96.213.218:/thrive_export /mnt/filestore/${POD_NAMESPACE}/dgraph_exports
                 mkdir -p /dgraph/export
-                mount --bind /mnt/filestore/${POD_NAMESPACE}/export /dgraph/export
+                ln /mnt/filestore/${POD_NAMESPACE}/dgraph_exports /dgraph/export
           preStop:
             exec:
               command:
@@ -344,7 +344,6 @@ spec:
               - -c
               - |
                 umount /dgraph/export
-                umount /mnt/filestore/${POD_NAMESPACE}/export
         command:
           - bash
           - "-c"
