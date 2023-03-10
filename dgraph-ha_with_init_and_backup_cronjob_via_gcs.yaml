@@ -449,6 +449,11 @@ spec:
           containers:
           - name: dgraph-backup
             image: artooro/curl
+            env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
             args:
             - /bin/sh
             - -c
