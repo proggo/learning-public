@@ -452,5 +452,5 @@ spec:
             args:
             - /bin/sh
             - -c
-            - curl http://dgraph-alpha.{POD_NAMESPACE}.svc.cluster.local:8080/admin/export
+            - curl 'http://dgraph-alpha.${POD_NAMESPACE}.svc.cluster.local:8080/admin/export'
           restartPolicy: OnFailure
