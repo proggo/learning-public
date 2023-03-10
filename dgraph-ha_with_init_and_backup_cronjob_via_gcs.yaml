@@ -400,7 +400,7 @@ spec:
         ports:
         - containerPort: 8000
 ---        
-apiVersion: batch/v1beta1
+apiVersion: batch/v1 
 kind: CronJob
 metadata:
   name: dgraph-backup
