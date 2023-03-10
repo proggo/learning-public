@@ -398,4 +398,23 @@ spec:
       - name: ratel
         image: dgraph/ratel:latest
         ports:
+---        
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dgraph-backup
+spec:
+  schedule: "15 02 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dgraph-backup
+            image: artooro/curl
+            args:
+            - /bin/sh
+            - -c
+            - curl http://dgraph-alpha.{POD_NAMESPACE}.svc.cluster.local:8080/admin/export
+          restartPolicy: OnFailure
         - containerPort: 8000
