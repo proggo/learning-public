@@ -206,6 +206,39 @@ spec:
         requests:
           storage: 10Gi
 ---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: filestore-pv
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 10.96.213.218
+    path: /thrive_export/${POD_NAMESPACE}
+  mountOptions:
+    - nfsvers=4.1
+    - noresvport
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard-rwx
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filestore-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: standard-rwx
+
+---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
 apiVersion: apps/v1
 kind: StatefulSet
