@@ -365,6 +365,9 @@ spec:
       - name: datadir
         persistentVolumeClaim:
           claimName: datadir
+      - name: filestore-pv
+        persistentVolumeClaim:
+          claimName: filestore-pvc
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
