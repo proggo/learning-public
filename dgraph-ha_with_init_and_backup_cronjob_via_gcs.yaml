@@ -234,7 +234,7 @@ spec:
     - nfsvers=4.1
     - noresvport
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: basic_hdd
+  storageClassName: basic-hdd
 
 ---
 
@@ -245,7 +245,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: basic_hdd
+  storageClassName: basic-hdd
 
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
