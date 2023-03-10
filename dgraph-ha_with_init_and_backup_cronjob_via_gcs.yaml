@@ -214,8 +214,8 @@ metadata:
 provisioner: file.csi.filestore.google.com
 parameters:
   type: BASIC_HDD
-  projectID: $(metadata.projectID)
-  zone: $(metadata.zone)
+  projectID: dgraph-kubernetes
+  zone: asia-southeast1-a
 
 ---
 apiVersion: v1
