@@ -246,6 +246,9 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: basic-hdd
+  resources:
+    requests:
+      storage: 1Ti
 
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
