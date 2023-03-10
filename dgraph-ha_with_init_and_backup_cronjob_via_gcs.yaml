@@ -398,6 +398,7 @@ spec:
       - name: ratel
         image: dgraph/ratel:latest
         ports:
+        - containerPort: 8000
 ---        
 apiVersion: batch/v1beta1
 kind: CronJob
@@ -417,4 +418,3 @@ spec:
             - -c
             - curl http://dgraph-alpha.{POD_NAMESPACE}.svc.cluster.local:8080/admin/export
           restartPolicy: OnFailure
-        - containerPort: 8000
