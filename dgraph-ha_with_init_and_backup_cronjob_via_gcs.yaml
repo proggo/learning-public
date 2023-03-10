@@ -300,6 +300,8 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
+        - name: filestore-pv
+          mountPath: /dgraph/export
         - name: googleservice
           mountPath: /etc/google
           readOnly: true
@@ -329,21 +331,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command:
-              - sh
-              - -c
-              - |
-                mkdir -p /mnt/filestore/${POD_NAMESPACE}/dgraph_exports
-                mount -t nfs4 -o nfsvers=4.1 10.96.213.218:/thrive_export /mnt/filestore/${POD_NAMESPACE}/dgraph_exports
-                mkdir -p /dgraph/export
-                ln -s /mnt/filestore/${POD_NAMESPACE}/dgraph_exports /dgraph/export
-          preStop:
-            exec:
-              command:
-              - sh
-              - -c
-              - |
-                umount /dgraph/export
+              command: ["mkdir", "-p", "/dgraph/export"]
         command:
           - bash
           - "-c"
