@@ -245,10 +245,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 50Gi
-  storageClassName: standard-rwx
+  storageClassName: basic_hdd
 
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
