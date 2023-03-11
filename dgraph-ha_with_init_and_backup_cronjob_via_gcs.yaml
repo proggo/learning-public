@@ -337,7 +337,7 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /dgraph
-            - name: filestore-pv
+            - name: filestore-pvc
               mountPath: /dgraph/export
             - name: googleservice
               mountPath: /etc/google
