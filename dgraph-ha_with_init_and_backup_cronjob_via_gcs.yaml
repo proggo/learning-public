@@ -217,35 +217,48 @@ spec:
 #   projectID: dgraph-kubernetes
 #   zone: asia-southeast1-a
 
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: filestore-pv
-spec:
-  capacity:
-    storage: 1Ti
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: thrive-dgraph-export.fileserver.googleusercontent.com
-    path: /thrive_export/${POD_NAMESPACE}
-  mountOptions:
-    - nfsvers=4.1
-    - noresvport
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: standard-rwx
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: filestore-pv
+# spec:
+#   capacity:
+#     storage: 1Ti
+#   accessModes:
+#     - ReadWriteMany
+#   nfs:
+#     server: thrive-dgraph-export.fileserver.googleusercontent.com
+#     path: /thrive_export/${POD_NAMESPACE}
+#   mountOptions:
+#     - nfsvers=4.1
+#     - noresvport
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: standard-rwx
 
 ---
 
-apiVersion: v1
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: filestore-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: standard-rwx
+#   resources:
+#     requests:
+#       storage: 1Ti
+      
+
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
   name: filestore-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: standard-rwx
+    - ReadWriteMany
+  storageClassName: standard
   resources:
     requests:
       storage: 1Ti
