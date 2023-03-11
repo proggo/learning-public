@@ -251,17 +251,17 @@ spec:
 #       storage: 1Ti
       
 
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: filestore-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: standard
-  resources:
-    requests:
-      storage: 1Ti
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: filestore-pvc
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: standard
+#   resources:
+#     requests:
+#       storage: 1Ti
 
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
@@ -365,7 +365,7 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
-        - name: filestore-pv
+        - name: filestore-pvc
           mountPath: /dgraph/export
         - name: googleservice
           mountPath: /etc/google
@@ -430,7 +430,7 @@ spec:
       - name: datadir
         persistentVolumeClaim:
           claimName: datadir
-      - name: filestore-pv
+      - name: filestore-pvc
         persistentVolumeClaim:
           claimName: filestore-pvc
   updateStrategy:
@@ -440,6 +440,10 @@ spec:
       name: datadir
       annotations:
         volume.alpha.kubernetes.io/storage-class: anything
+  - metadata:
+      name: filestore-pvc
+      annotations:
+        volume.alpha.kubernetes.io/storage-class: standard-rwx
     spec:
       accessModes:
         - "ReadWriteOnce"
