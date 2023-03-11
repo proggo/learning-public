@@ -257,7 +257,7 @@ metadata:
   name: filestore-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: standard
   resources:
     requests:
