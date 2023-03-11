@@ -451,7 +451,7 @@ spec:
     spec:
       storageClassName: standard-rwx
       accessModes:
-        - "ReadWriteOnce"
+        - "ReadWriteMany"
       resources:
         requests:
           storage: 1Ti
