@@ -324,6 +324,11 @@ spec:
           volumeMounts:
             - name: datadir
               mountPath: /dgraph
+            - name: filestore-pv
+              mountPath: /dgraph/export
+            - name: googleservice
+              mountPath: /etc/google
+              readOnly: true
           resources:
             requests:
               memory: 12Gi
