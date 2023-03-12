@@ -263,16 +263,18 @@ spec:
 #     requests:
 #       storage: 1Ti
 
-kind: StorageClass
+
+
 apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
   name: filestore-sc
 provisioner: filestore.csi.storage.gke.io
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
 parameters:
-  type: nfs
-  filesystem: nfs
-
-
+  tier: standard
+  network: default
 
 
 
