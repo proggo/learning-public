@@ -275,6 +275,8 @@ allowVolumeExpansion: true
 parameters:
   tier: BASIC_HDD
   network: default
+  fileShare: dgraph_export
+  location: asia-southeast1-a
 
 
 
