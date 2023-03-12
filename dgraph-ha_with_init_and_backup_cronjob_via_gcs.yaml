@@ -263,6 +263,20 @@ spec:
 #     requests:
 #       storage: 1Ti
 
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: filestore-sc
+provisioner: filestore.csi.storage.gke.io
+parameters:
+  type: nfs
+  filesystem: nfs
+  archiveOnDelete: "false"
+
+
+
+
+
 ---
 # This StatefulSet runs 3 replicas of Dgraph Alpha.
 apiVersion: apps/v1
@@ -449,13 +463,13 @@ spec:
   - metadata:
       name: filestore-pvc
     spec:
-      storageClassName: standard-rwx
       accessModes:
-        - "ReadWriteMany"
+        - ReadWriteMany
+      storageClassName: filestore-sc
       resources:
         requests:
-          storage: 1Ti
-      volumeName: filestore-pv
+          storage: 10Gi
+
 ---
 apiVersion: apps/v1
 kind: Deployment
