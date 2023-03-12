@@ -271,7 +271,6 @@ provisioner: filestore.csi.storage.gke.io
 parameters:
   type: nfs
   filesystem: nfs
-  archiveOnDelete: "false"
 
 
 
