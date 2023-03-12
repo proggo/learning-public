@@ -273,7 +273,7 @@ provisioner: filestore.csi.storage.gke.io
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
 parameters:
-  tier: standard
+  tier: BASIC_HDD
   network: default
 
 
