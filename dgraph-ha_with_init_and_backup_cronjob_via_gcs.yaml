@@ -272,10 +272,16 @@ metadata:
 provisioner: filestore.csi.storage.gke.io
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
+reclaimPolicy: Retain
 parameters:
   tier: BASIC_HDD
   network: default
-  fileShare: dgraph_export
+allowedTopologies:
+- matchLabelExpressions:
+  - key: name
+    values:
+    - filestore-pv
+
 
 
 
