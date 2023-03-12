@@ -269,14 +269,10 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: filestore-sc
-provisioner: filestore.csi.storage.gke.io
+provisioner: nfs-subdir-external-provisioner
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
 reclaimPolicy: Retain
-parameters:
-  tier: BASIC_HDD
-  network: default
-  server: "172.26.61.90"
 
 
 
