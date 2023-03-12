@@ -277,7 +277,7 @@ parameters:
   tier: BASIC_HDD
   network: default
   server: "172.26.61.90"
-  path: "/dgraph_export"
+
 
 
 ---
