@@ -133,7 +133,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: zero
-        image: dgraph/dgraph:latest
+        image: dgraph/dgraph:v22.0.2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5080
@@ -265,7 +265,7 @@ spec:
       #
       initContainers:
         - name: init-alpha
-          image: dgraph/dgraph:latest
+          image: dgraph/dgraph:v22.0.2
           command:
             - bash
             - "-c"
@@ -285,7 +285,7 @@ spec:
               cpu: '4'
       containers:
       - name: alpha
-        image: dgraph/dgraph:latest
+        image: dgraph/dgraph:v22.0.2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7080
@@ -377,6 +377,6 @@ spec:
     spec:
       containers:
       - name: ratel
-        image: dgraph/ratel:latest
+        image: dgraph/ratel:v22.0.2
         ports:
         - containerPort: 8000
